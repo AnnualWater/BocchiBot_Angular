@@ -1,0 +1,39 @@
+<p-toast position='top-center'></p-toast>
+<div class='grid'>
+  <div class='col-12'>
+    <p-card header='GPT Bot'>
+      <div class='chat-main'>
+        <div class='msg-content'>
+          <p-scrollPanel #messageScrollPanel [style]="{ width: '100%', height: '490px' }">
+            <div *ngFor='let message of messages'>
+              <div *ngIf='message.role==="assistant"'>
+                <p-card header='GPT Bot'>
+                  <markdown lineNumbers ngPreserveWhitespaces lineHighlight clipboard
+                            [data]='message.content'></markdown>
+                </p-card>
+              </div>
+              <div *ngIf='message.role==="user"'>
+                <p-card header='用户'>
+                  <markdown lineNumbers ngPreserveWhitespaces lineHighlight>
+                    {{message.content}}
+                  </markdown>
+                </p-card>
+              </div>
+            </div>
+          </p-scrollPanel>
+        </div>
+        <div class='user-input'>
+          <span class='p-float-label' [style]='{resize:"none",height:"90px",width:"calc(100% - 80px)"}'>
+
+          <textarea id='user_input' pInputTextarea [disabled]='loading' [(ngModel)]='inputString'
+                    [style]='{resize:"none",height:"90px",width:"100%"}'></textarea>
+            <label for='user_input' style='color:hotpink;'>请输入问题</label>
+          </span>
+          <p-button [disabled]='loading' [style]='{height:"80px", width:"70px",margin:"5px"}' label='发送'
+                    (click)='SendMessage()'></p-button>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>
+

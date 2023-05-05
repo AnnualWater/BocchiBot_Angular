@@ -1,0 +1,33 @@
+<p-toast position='top-center'></p-toast>
+<div class='grid'>
+  <div class='col-12'>
+    <p-card header='番剧订阅'>
+      <p-table [value]='comicSubscriptions'>
+        <ng-template pTemplate='header'>
+          <tr>
+            <th>番剧</th>
+            <th>番剧ID</th>
+            <th>当前</th>
+            <th>更新信息</th>
+            <th>完结</th>
+            <th>操作</th>
+          </tr>
+        </ng-template>
+        <ng-template let-comic pTemplate='body'>
+          <tr>
+            <td>{{comic.title}}</td>
+            <td>{{comic.comicId}}</td>
+            <td>{{comic.episode}}</td>
+            <td>{{comic.updateInfo}}</td>
+            <td>{{comic.isEnd}}</td>
+            <td>
+              <p-confirmPopup></p-confirmPopup>
+              <p-button (click)='delComicSubscription($event,comic.comicId)' label='取消订阅'
+                        styleClass='p-button-warning'></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </div>
+</div>

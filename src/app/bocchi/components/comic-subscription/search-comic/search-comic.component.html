@@ -1,0 +1,41 @@
+<p-toast position='top-center'></p-toast>
+<div class='grid'>
+  <div class='col-12'>
+    <p-card header='番剧搜索'>
+      <div class='input'>
+        <span class='p-float-label' style='margin:0 5px 0  0'>
+          <input id='user_input' pInputText type='text' [(ngModel)]='searchKey'>
+          <label for='user_input' style='color:hotpink;'>请输入搜索关键字</label>
+        </span>
+        <p-button (click)='search()' label='搜索' icon='pi pi-search'></p-button>
+      </div>
+      <div>
+        <p-table [value]='searchComicList'>
+          <ng-template pTemplate='header'>
+            <tr>
+              <th>番剧</th>
+              <th>番剧名</th>
+              <th>番剧ID</th>
+              <th>更新信息</th>
+              <th>操作</th>
+            </tr>
+          </ng-template>
+          <ng-template let-comic pTemplate='body'>
+            <tr>
+              <td>
+                <p-image src='{{comic.imgUrl}}' alt='Image' width='80'></p-image>
+              </td>
+              <td>{{comic.title}}</td>
+              <td>{{comic.comicId}}</td>
+              <td>{{comic.updateInfo}}</td>
+              <td>
+                <p-confirmPopup></p-confirmPopup>
+                <p-button (click)='subscriptionComic(comic.comicId)' label='订阅'></p-button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-card>
+  </div>
+</div>

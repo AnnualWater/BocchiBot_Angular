@@ -1,0 +1,32 @@
+<div class='layout-topbar'>
+  <a class='layout-topbar-logo' routerLink=''>
+    <img src='assets/images/logo/logo-light-thumbnail.png' alt='logo'>
+    <span>BocchiBot</span>
+  </a>
+
+  <button #menuButton class='p-link layout-menu-button layout-topbar-button' (click)='layoutService.onMenuToggle()'>
+    <i class='pi pi-bars'></i>
+  </button>
+
+  <button #topBarMenuButton class='p-link layout-topbar-menu-button layout-topbar-button'
+          (click)='layoutService.showProfileSidebar()'>
+    <i class='pi pi-ellipsis-v'></i>
+  </button>
+
+  <div #topBarMenu class='layout-topbar-menu'
+       [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+    <button *ngIf='this.isAuthenticated()' style='color: red' class='p-link layout-topbar-button'
+            (click)='logOut()'>
+      <i class='pi pi-sign-out'></i>
+      <span>登出</span>
+    </button>
+    <button class='p-link layout-topbar-button' [routerLink]="'/account'">
+      <i class='pi pi-user' [style.color]='getUserIconColor()'></i>
+      <span>用户信息</span>
+    </button>
+    <a *ngIf='this.isAdmin' class='p-link layout-topbar-button' href='{{manageRouteLink}}'>
+      <i class='pi pi-cog'></i>
+      <span>设置</span>
+    </a>
+  </div>
+</div>
